@@ -1,0 +1,14 @@
+Installation:
+
+    git clone git@github.com:showgood/myvim.git ~/myvim
+
+Create symlinks:
+
+ln -s ~/myvim/vimrc ~/.vimrc
+ln -s ~/myvim/gvimrc ~/.gvimrc
+
+Switch to the `~/myvim` directory, and fetch submodules:
+
+cd ~/myvim
+git submodule init
+git submodule update
