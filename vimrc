@@ -207,3 +207,12 @@ noremap <C-Tab> :tabn<cr>
 let g:ConqueTerm_PromptRegex = '^\w\+@[0-9A-Za-z_.-]\+:[0-9A-Za-z_./\~,:-]\+\$'
 let g:ConqueTerm_CWInsert = 1
 cnoremap Term :ConqueTermTab cmd.exe<Esc>
+
+let g:UltiSnipsSnippetsDir="/Users/showgood/myvim/bundle/UltiSnips-1.4/UltiSnips"
+
+nnoremap <leader>es <C-w><C-v><C-l>:UltiSnipsEdit<cr>
+
+let g:UltiSnipsExpandTrigger="<tab>"      
+let g:UltiSnipsListSnippets="<c-tab>"       
+let g:UltiSnipsJumpForwardTrigger="<tab>" 
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
