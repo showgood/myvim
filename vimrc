@@ -1,10 +1,14 @@
+source $HOME/myvim/bundle/pathogen/autoload/pathogen.vim
+
+call pathogen#infect('$HOME/myvim/bundle')
+
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
 set nocompatible
 autocmd!
 
-source $HOME/vimfiles/exvimrc
+source $HOME/myvim/exvimrc
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,latin1
 
 filetype on " enable file type detection 
