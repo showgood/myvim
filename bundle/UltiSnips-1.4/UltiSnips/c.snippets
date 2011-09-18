@@ -40,24 +40,32 @@ for (${4:size_t} ${2:i} = 0; $2 < ${1:count}; ${3:++$2})
 }
 endsnippet
 
+snippet fori "simple form of loop"
+for (int i = 0; i < ${1:limit}; ++i)
+{
+    $0
+}
+endsnippet
+
 snippet enum "Enumeration"
-enum ${1:name} { $0 };
+enum ${1:name}
+{
+    $0
+};
 endsnippet
 
 snippet once "Include header once only guard"
 #ifndef ${1:`!p
 if not snip.c:
-	import random, string
-	name = re.sub(r'[^A-Za-z0-9]+','_', snip.fn).upper()
-	rand = ''.join(random.sample(string.ascii_letters+string.digits, 8))
-	snip.rv = ('%s_%s' % (name,rand)).upper()
+	import string
+	snip.rv = re.sub(r'[^A-Za-z0-9]+','_', snip.fn).upper()
 else:
     snip.rv = snip.c`}
 #define $1
 
 ${0}
 
-#endif /* end of include guard: $1 */
+#endif
 
 endsnippet
 

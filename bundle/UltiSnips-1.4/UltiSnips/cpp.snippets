@@ -20,10 +20,12 @@ private:
 endsnippet
 
 snippet ns "namespace .. (namespace)"
-namespace${1/.+/ /m}${1:`!p snip.rv = snip.basename or "name"`}
+namespace ${1:name}
 {
-	$0
-}${1/.+/ \/* /m}$1${1/.+/ *\/ /m}
+
+$0
+
+}
 endsnippet
 
 snippet readfile "read file (readF)"
@@ -49,42 +51,91 @@ snippet tp "template <typename ..> (template)"
 template <typename ${1:_InputIter}>
 endsnippet
 
-snippet ifd
-#ifndef `!p snip.rv = snip.basename.upper()+'_'+snip.ft.upper()`
-#define `!p snip.rv = snip.basename.upper()+'_'+snip.ft.upper()`
-    ${1:/* code */}
+snippet ifd "Include header guard"
+#ifndef `!p snip.rv = fn.replace(".","_").upper()`
+#define `!p snip.rv = fn.replace(".","_").upper()`
+
+$0
+
 #endif
 endsnippet
 
 snippet cls
-	class ${1:name} 
-	{
-	public:
-		$1();
-		virtual ~$1();
+class ${1:name} 
+{
+public:
+    $1();
+    virtual ~$1();
 
-		// copy constructor
-		$1 (const $1& rhs);
-		$1& operator= (const $1& rhs);
+    $0
 
-	private:
-		${2:/* TODO: members */}
-	};
+private:
+    // copy constructor
+    $1 (const $1& rhs);
+    $1& operator= (const $1& rhs);
+
+    ${2:/* TODO: members */}
+};
 endsnippet
 
-snippet fn
+snippet fni "function implementation"
 ${1:void} ${2:class}::${3:function}(${4:argument})
 {
     ${5:/*code*/}
 }
 endsnippet
 
-snippet cae
+snippet fnic "const function implementation"
+${1:void} ${2:class}::${3:function}(${4:argument}) const
+{
+    ${5:/*code*/}
+}
+endsnippet
+
+snippet fn "function declaration"
+${1:void} ${2:function}(${4:argument});
+endsnippet
+
+snippet fnc "const function declaration"
+${1:void} ${2:function}(${4:argument}) const;
+endsnippet
+
+snippet cae "CPPUNIT_ASSERT_EQUAL"
 CPPUNIT_ASSERT_EQUAL(${1:expression}, ${2:target});
 endsnippet
 
-snippet ca
+snippet ca "CPPUNIT_ASSERT"
 CPPUNIT_ASSERT(${1:left} ${2:==} ${3:right});
+endsnippet
+
+snippet in "#include <header.hpp>"
+#include <${1:header}.hpp>
+endsnippet
+
+snippet foriter "for loop iterator form"
+${1:container_type}::iterator iter = ${2:container}.begin();
+for (; iter != $2.end(); ++iter)
+{
+    $0
+}
+endsnippet
+
+snippet stc "static const variable"
+static const ${1:type} ${2:name};
+endsnippet
+
+snippet as "ASSERT(xxxx)"
+ASSERT(${1:condition});
+endsnippet
+
+snippet asp "ASSERT(pointer != NULL)"
+ASSERT(${1:pointer} != NULL);
+
+if (!$1)
+{
+    $0
+}
+
 endsnippet
 
 # vim:ft=snippets:
