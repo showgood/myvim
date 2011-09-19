@@ -1,3 +1,9 @@
+set runtimepath=$HOME/myvim,$VIMRUNTIME
+
+if has("gui_running")
+    silent exec "colorscheme molokai"
+endif
+
 source $HOME/myvim/bundle/pathogen/autoload/pathogen.vim
 
 call pathogen#infect('$HOME/myvim/bundle')
@@ -208,7 +214,7 @@ let g:ConqueTerm_PromptRegex = '^\w\+@[0-9A-Za-z_.-]\+:[0-9A-Za-z_./\~,:-]\+\$'
 let g:ConqueTerm_CWInsert = 1
 cnoremap Term :ConqueTermTab cmd.exe<Esc>
 
-let g:UltiSnipsSnippetsDir="/Users/showgood/myvim/bundle/UltiSnips-1.4/UltiSnips"
+let g:UltiSnipsSnippetsDir="$HOME/myvim/bundle/UltiSnips-1.4/UltiSnips"
 
 nnoremap <leader>es <C-w><C-v><C-l>:UltiSnipsEdit<cr>
 

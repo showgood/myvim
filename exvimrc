@@ -131,14 +131,17 @@ set matchtime=0 " 0 second to show the matching paren ( much faster )
 set scrolloff=0 " minimal number of screen lines to keep above and below the cursor 
 set nowrap " I don't like wrap, cause in split window mode, it feel strange
 
+" --------------------------------------------------------------------------------------
+" disable the colorscheme ex_lightgray because I like molokai a lot more (showgood)
+" --------------------------------------------------------------------------------------
 " color scheme define
-if has("gui_running")
-    silent exec "colorscheme ex_lightgray"
-else " if we are in terminal mode
-    " NOTE: you cannot use if has('mac') to detect platform in terminal mode.
-    silent exec "colorscheme default"
-    " silent exec "colorscheme darkblue"
-endif
+" if has("gui_running")
+"     silent exec "colorscheme ex_lightgray"
+" else " if we are in terminal mode
+"     " NOTE: you cannot use if has('mac') to detect platform in terminal mode.
+"     silent exec "colorscheme default"
+"     " silent exec "colorscheme darkblue"
+" endif
 
 " ------------------------------------------------------------------ 
 " Desc: Vim UI
@@ -659,17 +662,17 @@ function g:ex_CustomHighlight()
     " special color settings 
     " ======================================================== 
 
-    if exists('g:colors_name') && g:colors_name == 'ex_lightgray'
-        " ex plugins
-        hi ex_SynSearchPattern gui=bold guifg=DarkRed guibg=Gray term=bold cterm=bold ctermfg=DarkRed ctermbg=Gray
-        hi exMH_GroupNameEnable term=bold cterm=bold ctermfg=DarkRed ctermbg=Gray gui=bold guifg=DarkRed guibg=Gray
-        hi exMH_GroupNameDisable term=bold cterm=bold ctermfg=Red ctermbg=DarkGray gui=bold guifg=DarkGray guibg=Gray
+    " if exists('g:colors_name') && g:colors_name == 'ex_lightgray'
+    "     " ex plugins
+    "     hi ex_SynSearchPattern gui=bold guifg=DarkRed guibg=Gray term=bold cterm=bold ctermfg=DarkRed ctermbg=Gray
+    "     hi exMH_GroupNameEnable term=bold cterm=bold ctermfg=DarkRed ctermbg=Gray gui=bold guifg=DarkRed guibg=Gray
+    "     hi exMH_GroupNameDisable term=bold cterm=bold ctermfg=Red ctermbg=DarkGray gui=bold guifg=DarkGray guibg=Gray
 
-        " other plugins
-        hi MBEVisibleNormal term=bold cterm=bold ctermbg=DarkGray ctermfg=Black gui=bold guibg=DarkGray guifg=Black
-        hi MBENormal ctermbg=Gray ctermfg=DarkGray guibg=Gray guifg=DarkGray
-        hi MyTagListTitle term=bold cterm=bold ctermfg=DarkRed ctermbg=Gray gui=bold guifg=DarkRed guibg=Gray 
-    endif
+    "     " other plugins
+    "     hi MBEVisibleNormal term=bold cterm=bold ctermbg=DarkGray ctermfg=Black gui=bold guibg=DarkGray guifg=Black
+    "     hi MBENormal ctermbg=Gray ctermfg=DarkGray guibg=Gray guifg=DarkGray
+    "     hi MyTagListTitle term=bold cterm=bold ctermfg=DarkRed ctermbg=Gray gui=bold guifg=DarkRed guibg=Gray 
+    " endif
 
 endfunction
 
