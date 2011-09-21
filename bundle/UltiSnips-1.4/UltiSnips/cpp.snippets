@@ -43,7 +43,7 @@ snippet map "std::map (map)"
 std::map<${1:key}, ${2:value}> map$0;
 endsnippet
 
-snippet vector "std::vector (v)"
+snippet stdvector "std::vector (v)"
 std::vector<${1:char}> v$0;
 endsnippet
 
@@ -136,6 +136,21 @@ if (!$1)
     $0
 }
 
+endsnippet
+
+snippet tc "new test cases(not test function)"
+// ${1:desc}
+{
+    $0
+}
+endsnippet
+
+snippet vector "UIVector"
+UIVector<${1:int}> ${2:myVector};
+endsnippet
+
+snippet iter "get an iterator"
+${1:container_type}::iterator iter = ${2:container}.${3:begin()};
 endsnippet
 
 # vim:ft=snippets:
