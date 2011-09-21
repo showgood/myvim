@@ -23,7 +23,16 @@ filetype plugin on " enable loading the plugin for appropriate file type
 :let mapleader = ","
 :let maplocalleader =","
 
+iabbr hwo how
+nnoremap ; :
+
+set wildignore=*.o,*.obj,*.pyc,*.swp
+
 set nowrapscan
+" insert tabs on the start of a line according to
+"shiftwidth, not tabstop
+set smarttab
+set copyindent    " copy the previous indentation on autoindenting
 set history=200 " keep 50 lines of command line history
 syn on
 set tabstop=4
@@ -46,7 +55,20 @@ set wildmenu " turn on wild menu, try typing :h and press <Tab>
 set showcmd	" display incomplete commands
 set cmdheight=1 " 1 screen lines to use for the command-line 
 set ruler " show the cursor position all the time
-set hid " allow to change buffer without saving 
+set hidden " allow to change buffer without saving 
+
+"watch out.. no backup will be saved
+set nobackup
+set noswapfile
+
+set list
+set listchars=tab:>.,trail:.,extends:#,nbsp:.
+
+set pastetoggle=<F12>
+
+" Use Q for formatting the current paragraph (or selection)
+vmap Q gq
+nmap Q gqap
 
 " disable menu & toolbar
 "set guioptions-=m
@@ -115,6 +137,7 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 "open vimrc file in vertical window
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " When vimrc is edited, reload it
 "not working...
@@ -131,6 +154,9 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+"zoom window
+nnoremap <C-o> :ZoomWin<cr>
 
 map <F2> :NERDTreeToggle<cr>
 nnoremap <F5> :GundoToggle<CR>
@@ -222,3 +248,5 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsListSnippets="<c-tab>"       
 let g:UltiSnipsJumpForwardTrigger="<tab>" 
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+let g:EasyMotion_mapping_t  = '_t'
