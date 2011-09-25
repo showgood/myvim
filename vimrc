@@ -24,6 +24,8 @@ filetype plugin on " enable loading the plugin for appropriate file type
 :let maplocalleader =","
 
 iabbr hwo how
+
+"quicker for something like :w
 nnoremap ; :
 
 set wildignore=*.o,*.obj,*.pyc,*.swp
@@ -99,6 +101,8 @@ set thesaurus+=$HOME/vimfiles/thesaur.txt
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [ASCII=\%3.3b]\ [HEX=\%02.2B]\ [POS=%4l,%4v]\ [%p%%]\ [LEN=%L]
 set laststatus=2
 
+"search all the lines match the current word under cursor in the whole file and 
+"list them in tne quickfix window
 nmap <leader>lv :lv /<c-r>=expand("<cword>")<cr>/ %<cr>:lw<cr>
 
 nnoremap / /\v
@@ -138,6 +142,10 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 "open vimrc file in vertical window
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
+
+"copy the line above current line and paste it
+nnoremap <leader>y kyyp
+inoremap <leader>y <esc>kyyp
 
 " When vimrc is edited, reload it
 "not working...
