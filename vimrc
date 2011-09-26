@@ -28,7 +28,7 @@ iabbr hwo how
 "quicker for something like :w
 nnoremap ; :
 
-set wildignore=*.o,*.obj,*.pyc,*.swp
+set wildignore=*.o,*.obj,*.pyc,*.swp,*.ico,*.pdb,*.ilk,*.dep,*.obmp
 
 set nowrapscan
 " insert tabs on the start of a line according to
@@ -231,7 +231,10 @@ nnoremap <unique> <leader>js :ExjsToggle<CR>
 nnoremap <unique> <leader>ss :ExslSelectToggle<CR>
 
 if has('win32')
+  "copy just filename for the file under edit to clipboard
   nmap ,cs :let @*=substitute(expand("%:t"), "/", "\\", "g")<CR>
+
+  "copy filename with path for the file under edit to clipboard
   nmap ,cl :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 else
   nmap ,cs :let @*=expand("%:t")<CR>
@@ -258,3 +261,16 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 let g:EasyMotion_mapping_t  = '_t'
+
+call CountJump#TextObject#MakeWithCountSearch('', '/', 'ai', 'v', '\\\@<!/', '\\\@<!/')
+
+let g:session_autoload='prompt'
+let g:session_default_to_last=1
+
+" Center display line after searches
+nnoremap n   nzz
+nnoremap N   Nzz
+nnoremap *   *zz
+nnoremap #   #zz
+nnoremap g*  g*zz
+nnoremap g#  g#z
