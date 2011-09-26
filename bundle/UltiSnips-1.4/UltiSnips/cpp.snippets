@@ -153,4 +153,16 @@ snippet iter "get an iterator"
 ${1:container_type}::iterator iter = ${2:container}.${3:begin()};
 endsnippet
 
+snippet dlink "add xml snippet to link the design doc"
+// <?xml version="1.0">
+// <component name="${1:component}">
+//     <design document="D270-${2:design doc number}"/>
+// </component>
+// <?xmlend>
+endsnippet
+
+snippet todo "add todo"
+// TODO:: ${1:description}
+endsnippet
+
 # vim:ft=snippets:
