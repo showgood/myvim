@@ -270,7 +270,68 @@ let g:session_default_to_last=1
 " Center display line after searches
 nnoremap n   nzz
 nnoremap N   Nzz
-nnoremap *   *zz
-nnoremap #   #zz
-nnoremap g*  g*zz
-nnoremap g#  g#z
+
+"disabled because conflict with mark.vim plugin
+" nnoremap *   *zz
+" nnoremap #   #zz
+"nnoremap g*  g*zz
+"nnoremap g#  g#z
+
+" imap <Leader>ymd   <C-R>=strftime("%y%m%d")<CR>
+" imap <Leader>mdy   <C-R>=strftime("%m/%d/%y")<CR>
+" imap <Leader>ndy   <C-R>=strftime("%b %d, %Y")<CR>
+" imap <Leader>hms   <C-R>=strftime("%T")<CR>
+" imap <Leader>ynd   <C-R>=strftime("%Y %b %d")<CR>
+
+if has("win32")
+    :command -nargs=0 Log :call ExecuteCommand("TortoiseProc.exe /command:log /path:", "%")
+    :command -nargs=0 Diff :call ExecuteCommand("TortoiseProc.exe /command:diff /path:", "%")
+
+    "simple wrapper so we can pass argument to TortoiseSvn
+    "by showgood
+    function! ExecuteCommand(command, arg)
+        let cmd = a:command
+        if a:arg == "%"
+            let cmd .= expand("%")
+        else
+            let cmd .= a:arg
+        endif
+        echo cmd
+        call xolox#shell#execute(cmd, 0)
+    endfunction
+
+    let g:shell_mappings_enabled=0
+    inoremap <F12> <C-o>:Fullscreen<CR>
+    nnoremap <F12> :Fullscreen<CR>
+    inoremap <C-F12> <C-o>:Maximize<CR>
+    nnoremap <C-F12> :Maximize<CR>
+endif
+
+"function which use beyond compare to compare
+"two files currently opened in two windows
+"must have two windows opened
+"the path for beyond compare must be put
+"in the PATH environment variable
+"by showgood
+function CompareTwoFiles()
+    if winbufnr(2) == -1
+        echo "only one window.."
+        return
+    endif
+
+    if winbufnr(3) != -1
+        echo "more than two windows.."
+        return
+    endif
+
+    let buf_a  = bufname(winbufnr(1))
+    let buf_b  = bufname(winbufnr(2))
+    let file_a = fnamemodify(buf_a, ":p")
+    let file_b = fnamemodify(buf_b, ":p")
+
+    let command  = "BComp.exe ". file_a . " " . file_b
+
+    call xolox#shell#execute(command, 0)
+endfunction
+
+:command -nargs=0 Comp :call CompareTwoFiles()
