@@ -66,7 +66,7 @@ set noswapfile
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
-set pastetoggle=<F12>
+" set pastetoggle=<F12>
 
 " Use Q for formatting the current paragraph (or selection)
 vmap Q gq
@@ -251,7 +251,7 @@ let g:ConqueTerm_PromptRegex = '^\w\+@[0-9A-Za-z_.-]\+:[0-9A-Za-z_./\~,:-]\+\$'
 let g:ConqueTerm_CWInsert = 1
 cnoremap Term :ConqueTermTab cmd.exe<Esc>
 
-let g:UltiSnipsSnippetsDir="$HOME/myvim/bundle/UltiSnips-1.4/UltiSnips"
+let g:UltiSnipsSnippetsDir="$HOME/myvim/bundle/UltiSnips-1.5/UltiSnips"
 
 nnoremap <leader>es <C-w><C-v><C-l>:UltiSnipsEdit<cr>
 
@@ -265,7 +265,7 @@ let g:EasyMotion_mapping_t  = '_t'
 call CountJump#TextObject#MakeWithCountSearch('', '/', 'ai', 'v', '\\\@<!/', '\\\@<!/')
 
 let g:session_autoload='prompt'
-let g:session_default_to_last=1
+" let g:session_default_to_last=1
 
 " Center display line after searches
 nnoremap n   nzz
@@ -335,3 +335,5 @@ function CompareTwoFiles()
 endfunction
 
 :command -nargs=0 Comp :call CompareTwoFiles()
+
+nnoremap Y y$

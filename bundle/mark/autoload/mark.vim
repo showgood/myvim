@@ -386,9 +386,21 @@ function! mark#DoMark(...) " DoMark(regexp)
 	" add to history
 	if stridx(g:mwHistAdd, '/') >= 0
 		call histadd('/', regexp)
+
+		" changed by showgood
+		" also explicitly set the search register
+		" so n can work correctly without doing / again
+		let @/ = regexp
+
 	endif
 	if stridx(g:mwHistAdd, '@') >= 0
 		call histadd('@', regexp)
+
+		" changed by showgood
+		" set lastsearch when adding a mark
+		" instead of waiting when user press <leader>* or <leader>#
+		let s:lastSearch = regexp
+
 	endif
 
 	" choose an unused mark group
