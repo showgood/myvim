@@ -24,6 +24,8 @@ filetype plugin on " enable loading the plugin for appropriate file type
 :let maplocalleader =","
 
 iabbr hwo how
+iabbr fro for
+iabbr teh the
 
 "quicker for something like :w
 nnoremap ; :
@@ -78,7 +80,7 @@ nmap Q gqap
 
 " indent options
 "  see help cinoptions-values for more details
-set	cinoptions=>s,e0,n0,f0,{0,}0,^0,:0,=s,l0,b0,g0,hs,ps,ts,is,+s,c3,C0,0,(0,us,U0,w0,W0,m0,j0,)20,*30
+set	cinoptions=>s,e0,n0,f0,{0,}0,^0,:0,=s,l0,b0,g0,hs,ps,ts,is,+s,c3,C0,0,(0,us,U0,w0,W0,m0,j0,)20,*30,N-s
 " default '0{,0},0),:,0#,!^F,o,O,e' disable 0# for not ident preprocess
 " set cinkeys=0{,0},0),:,!^F,o,O,e
 
@@ -191,14 +193,13 @@ let g:vimwiki_list = [{'path': $HOME.'/mywiki',
 
 let g:vimwiki_camel_case = 0
 
-" let g:wikiPath = g:vimwiki_list.path
 let g:wikiPath = g:vimwiki_list[0].path
 function! GotoWikiDir()
-    let wikiPath = $HOME.'mywiki'
+    let wikiPath = $HOME.'/mywiki'
     exec 'lcd '.wikiPath
 endfunction
 
-cnoremap <silent> wiki :call GotoWikiDir()<cr>
+:command -nargs=0 Wiki :call GotoWikiDir()
 
 function OpenPwdInNerdTree()
     let pwd = getcwd()
@@ -206,7 +207,9 @@ function OpenPwdInNerdTree()
     echo pwd
 endfunction
 
-nnoremap <silent> <Leader>cd :call OpenPwdInNerdTree()<cr>
+"open current directory in NerdTree
+:command -nargs=0 Pwd :call OpenPwdInNerdTree()
+" nnoremap <silent> <Leader>cd :call OpenPwdInNerdTree()<cr>
 
 " settings for YankRing
 let g:yankring_max_history = 1000
@@ -249,14 +252,14 @@ noremap <C-Tab> :tabn<cr>
 
 let g:ConqueTerm_PromptRegex = '^\w\+@[0-9A-Za-z_.-]\+:[0-9A-Za-z_./\~,:-]\+\$'
 let g:ConqueTerm_CWInsert = 1
-cnoremap Term :ConqueTermTab cmd.exe<Esc>
+:command -nargs=0 Term :ConqueTermTab cmd.exe<Esc>
 
 let g:UltiSnipsSnippetsDir="$HOME/myvim/bundle/UltiSnips-1.5/UltiSnips"
 
 nnoremap <leader>es <C-w><C-v><C-l>:UltiSnipsEdit<cr>
 
-let g:UltiSnipsExpandTrigger="<tab>"      
-let g:UltiSnipsListSnippets="<c-tab>"       
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>" 
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
@@ -300,12 +303,15 @@ if has("win32")
         call xolox#shell#execute(cmd, 0)
     endfunction
 
-    let g:shell_mappings_enabled=0
-    inoremap <F12> <C-o>:Fullscreen<CR>
-    nnoremap <F12> :Fullscreen<CR>
-    inoremap <C-F12> <C-o>:Maximize<CR>
-    nnoremap <C-F12> :Maximize<CR>
 endif
+
+"redefine mappings for vim-shell plugin
+"because it conflicts with commentify
+let g:shell_mappings_enabled=0
+inoremap <F12> <C-o>:Fullscreen<CR>
+nnoremap <F12> :Fullscreen<CR>
+inoremap <C-F12> <C-o>:Maximize<CR>
+nnoremap <C-F12> :Maximize<CR>
 
 "function which use beyond compare to compare
 "two files currently opened in two windows
@@ -337,3 +343,10 @@ endfunction
 :command -nargs=0 Comp :call CompareTwoFiles()
 
 nnoremap Y y$
+
+let OmniCpp_MayCompleteDot = 1 " autocomplete with .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
+let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
+let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e. parameters) in popup window
