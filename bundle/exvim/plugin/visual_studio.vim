@@ -253,8 +253,7 @@ endfunction
 
 function! <Sid>DTEQuickfixOpen(which)
     if g:visual_studio_quickfix_height > 0
-        " jwu DISABLE
-        " exe 'copen '.g:visual_studio_quickfix_height
+        exe 'copen '.g:visual_studio_quickfix_height
         if a:which == 'Task List'
             exe 'setlocal errorformat='.g:visual_studio_quickfix_errorformat_task_list
         else
@@ -262,9 +261,8 @@ function! <Sid>DTEQuickfixOpen(which)
         endif
     endif
 
-    " jwu DISABLE
-    " cfile
-    silent exec 'QF '. &errorfile
+    cfile
+    "silent exec 'QF '. &errorfile
 endfunction
 
 "----------------------------------------------------------------------
@@ -556,7 +554,10 @@ if has('gui') && ( ! exists('g:visual_studio_menu') || g:visual_studio_menu != 0
     amenu <silent> &VisualStudio.&Put\ File :call DTEPutFile()<cr>
     amenu <silent> &VisualStudio.-separator1- :
     amenu <silent> &VisualStudio.&Task\ List :call DTETaskList()<cr>
-    amenu <silent> &VisualStudio.&Output :call DTEBuildOutput()<cr>
+    amenu <silent> &VisualStudio.Build_&Output :call DTEBuildOutput()<cr>
+    amenu <silent> &VisualStudio.&Debug_Output :call DTEDebugOutput()<cr>
+    amenu <silent> &VisualStudio.B&reakpoint_here :call DTEBreakInFile()<cr>
+    amenu <silent> &VisualStudio.&Add_to_watch :call DTEAddWatch(expand("<cword>"))<cr>
     amenu <silent> &VisualStudio.&Find\ Results\ 1 :call DTEFindResults(1)<cr>
     amenu <silent> &VisualStudio.Find\ Results\ &2 :call DTEFindResults(2)<cr>
     amenu <silent> &VisualStudio.-separator2- :
