@@ -94,3 +94,13 @@ decrement
 implement
 ascendingly
 distinguish
+limitation
+explicitly
+implicitly
+initialise
+respectively
+caveat
+difference
+describe
+instance
+something
