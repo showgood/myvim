@@ -104,3 +104,6 @@ difference
 describe
 instance
 something
+because
+singleton
+finally
