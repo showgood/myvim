@@ -394,20 +394,22 @@ command -narg=1 -complete=customlist,exUtility#CompleteBySymbolFile GVC call exU
 
 " code writing
 command LINE call exUtility#PutLine(86, '-')
-command -narg=1 NSS call exUtility#PutNamespaceStart('<args>')
-command -narg=1 NSE call exUtility#PutNamespaceEnd('<args>')
-command -range -narg=1 NS call exUtility#PutNamespace('<args>', <line1>, <line2>)
-command -range EXTC call exUtility#PutExternC(<line1>, <line2>)
-command HEADER call exUtility#PutHeader()
+" disabled by showgood
+" we don't really need these command, because snipmate or ultisnips can do it
+" command -narg=1 NSS call exUtility#PutNamespaceStart('<args>')
+" command -narg=1 NSE call exUtility#PutNamespaceEnd('<args>')
+" command -range -narg=1 NS call exUtility#PutNamespace('<args>', <line1>, <line2>)
+" command -range EXTC call exUtility#PutExternC(<line1>, <line2>)
+" command HEADER call exUtility#PutHeader()
 command SEP call exUtility#PutSeparate()
 command SEG call exUtility#PutSegment()
 command NOTE call exUtility#PutNote()
-command DEF call exUtility#PutDefine()
-command DEC call exUtility#PutDeclaration()
-command DES call exUtility#PutDescription()
-command MAIN call exUtility#PutMain()
-command -narg=1 CLASS call exUtility#PutClass( "class", '<args>' )
-command -narg=1 STRUCT call exUtility#PutClass( "struct", '<args>' )
+" command DEF call exUtility#PutDefine()
+" command DEC call exUtility#PutDeclaration()
+" command DES call exUtility#PutDescription()
+" command MAIN call exUtility#PutMain()
+" command -narg=1 CLASS call exUtility#PutClass( "class", '<args>' )
+" command -narg=1 STRUCT call exUtility#PutClass( "struct", '<args>' )
 
 " src-highlight
 command -range=% SHL call exUtility#SrcHighlight( <line1>, <line2> )
