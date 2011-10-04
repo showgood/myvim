@@ -10,7 +10,7 @@
 
 " Location of the ack utility
 if !exists("g:ackprg")
-	let g:ackprg="ack -H --nocolor --nogroup --column"
+	let g:ackprg="ack -H --nocolor --nogroup --column --cpp"
 endif
 
 function! s:Ack(cmd, args)
