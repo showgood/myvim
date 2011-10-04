@@ -23,6 +23,12 @@ filetype plugin on " enable loading the plugin for appropriate file type
 :let mapleader = ","
 :let maplocalleader =","
 
+set sessionoptions += "globals"
+set dictionary=$HOME/myvim/words.txt
+
+"open my dictionary file
+nnoremap <leader>ed <C-w><C-v><C-l>:e $HOME/myvim/words.txt<cr>
+
 iabbr hwo how
 iabbr fro for
 iabbr teh the
