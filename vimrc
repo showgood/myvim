@@ -36,7 +36,12 @@ iabbr teh the
 "quicker for something like :w
 nnoremap ; :
 
-set wildignore=*.o,*.obj,*.pyc,*.swp,*.ico,*.pdb,*.ilk,*.dep,*.obmp
+if has ("mac")
+    set wildignore=*.o,*.obj,*.pyc,*.xib,*.png,*.jpg,*.icns,*.pva,*.pdf,*.zip,*.rar,*.eml,*.sj,*.pys,*.m4a,*.tif
+else
+    set wildignore=*.o,*.obj,*.pyc,*.swp,*.ico,*.pdb,*.ilk,*.dep,*.obmp
+endif
+
 
 set nowrapscan
 " insert tabs on the start of a line according to
@@ -356,3 +361,10 @@ let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
 let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
 let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
 let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e. parameters) in popup window
+
+"make change a word with copied text easier
+nnoremap s diw"0P
+vnoremap s "_d"0P
+
+"make jump to exact cursor position of a mark easier
+nnoremap ' `
