@@ -125,7 +125,13 @@ nnoremap / /\v
 vnoremap / /\v
 
 " go to the directory of current editing file in NerdTree
-nnoremap <leader>opwd :NERDTree %:p:h<CR>
+function OpenPathForCurrentFile()
+    let path = expand("%:p:h")
+    exec 'NERDTree '.path
+    echo path
+endfunction
+" nnoremap <leader>opwd :NERDTree %:p:h<CR>
+:command -nargs=0 GoHere :call OpenPathForCurrentFile()
 
 nnoremap <leader>cn :cn<cr>
 nnoremap <leader>cp :cp<cr>
