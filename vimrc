@@ -85,6 +85,9 @@ set listchars=tab:>.,trail:.,extends:#,nbsp:.
 vmap Q gq
 nmap Q gqap
 
+nnoremap <space> <C-F>
+nnoremap <BS> <C-B>
+
 " disable menu & toolbar
 "set guioptions-=m
 "set guioptions-=T
@@ -127,8 +130,10 @@ nnoremap <leader>opwd :NERDTree %:p:h<CR>
 nnoremap <leader>cn :cn<cr>
 nnoremap <leader>cp :cp<cr>
 
-"yank the line above current line
-noremap <C-F> <esc>k<esc>yyp
+"yank the line above current line and paste it
+inoremap <C-S> <esc>k<esc>yyp
+nnoremap <C-S> kyyp
+
 "quicker escaping
 inoremap jj <ESC>
 
@@ -155,10 +160,6 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 "open vimrc file in vertical window
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
-
-"copy the line above current line and paste it
-nnoremap <leader>y kyyp
-inoremap <leader>y <esc>kyyp
 
 " When vimrc is edited, reload it
 "not working...
