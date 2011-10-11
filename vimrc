@@ -375,3 +375,6 @@ vnoremap s "_d"0P
 
 "make jump to exact cursor position of a mark easier
 nnoremap ' `
+
+source $HOME/myvim/showgood.vim
+nnoremap <F9> :call ToggleQuickFixWindow()<CR>
