@@ -20,5 +20,8 @@ function! ToggleQuickFixWindow()
         endif
     endfor
 
-    copen
+    "make quickfix window always open
+    "in the bottom and span the whole
+    "width of vim window
+    botright copen
 endfunction
