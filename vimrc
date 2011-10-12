@@ -101,7 +101,7 @@ set	cinoptions=>s,e0,n0,f0,{0,}0,^0,:0,=s,l0,b0,g0,hs,ps,ts,is,+s,c3,C0,0,(0,us,
 set viminfo=%,'50,\"100,n~/.viminfo
 set tags=tags;/
 set nocompatible
-nmap <Leader>f :LookupFile<CR>
+" nmap <Leader>f :LookupFile<CR>
 nmap <Leader>bx :EXB<CR>
 
 nmap <Leader>lp `[v`]

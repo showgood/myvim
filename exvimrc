@@ -1062,8 +1062,9 @@ if has("gui_running") "  the <alt> key is only available in gui mode.
         nnoremap <unique> <M-I> :LUTags<CR>
     endif
 endif
-nnoremap <unique> <leader>lf :LUTags<CR>
-nnoremap <unique> <leader>lb :LUBufs<CR>
+
+" nnoremap <unique> <leader>lf :LUTags<CR>
+" nnoremap <unique> <leader>lb :LUBufs<CR>
 nnoremap <unique> <silent> <Leader>ll :LUCurWord<CR>
 
 let g:LookupFile_TagExpr = ''
