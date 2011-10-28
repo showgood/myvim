@@ -230,7 +230,7 @@ endfunction
 " nnoremap <silent> <Leader>cd :call OpenPwdInNerdTree()<cr>
 
 " settings for YankRing
-let g:yankring_max_history = 1000
+let g:yankring_max_history = 200
 let g:yankring_min_element_length = 2
 nnoremap <silent> <F7> :YRShow<CR>
 
@@ -386,7 +386,11 @@ nnoremap <F9> :call ToggleQuickFixWindow()<CR>
 "q: is really hard to type for me
 nnoremap <leader>ec q:
 
+" /xxx/
 call CountJump#TextObject#MakeWithCountSearch('', '/', 'ai', 'v', '\\\@<!/', '\\\@<!/')
+" \xxx\
+call CountJump#TextObject#MakeWithCountSearch('', '\', 'ai', 'v', '\\\@<!\', '\\\@<!\')
+"=xxx=
 call CountJump#TextObject#MakeWithCountSearch('', '=', 'ai', 'v', '\\\@<!=', '\\\@<!=')
 " quck jump between two windows, just like C-6 for buffers
 au TabLeave * :let g:last_tab=tabpagenr()
@@ -399,3 +403,6 @@ fu! LastTab()
 endfu 
 
 nnoremap <silent> <M-6> :call LastTab()<cr>
+
+" set this explicitly so @ in normal mode can be used to playback macro
+let g:yankring_zap_keys = 'f t'
