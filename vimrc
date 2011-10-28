@@ -283,6 +283,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 let g:EasyMotion_mapping_t  = '_t'
 
+"avoid clash with camelcase plugin
+let g:EasyMotion_mapping_w = '_w'
+
 call CountJump#TextObject#MakeWithCountSearch('', '/', 'ai', 'v', '\\\@<!/', '\\\@<!/')
 
 let g:session_autoload='prompt'
@@ -303,6 +306,8 @@ nnoremap N   Nzz
 " imap <Leader>ndy   <C-R>=strftime("%b %d, %Y")<CR>
 " imap <Leader>hms   <C-R>=strftime("%T")<CR>
 " imap <Leader>ynd   <C-R>=strftime("%Y %b %d")<CR>
+imap <Leader>now   <C-R>=strftime("%c")<CR>
+" :command -nargs=0 Now :<C-R>=strftime("%Y %b %d")<CR>
 
 if has("win32")
     :command -nargs=0 Log :call ExecuteCommand("TortoiseProc.exe /command:log /path:", "%")
@@ -378,3 +383,19 @@ nnoremap ' `
 
 source $HOME/myvim/showgood.vim
 nnoremap <F9> :call ToggleQuickFixWindow()<CR>
+"q: is really hard to type for me
+nnoremap <leader>ec q:
+
+call CountJump#TextObject#MakeWithCountSearch('', '/', 'ai', 'v', '\\\@<!/', '\\\@<!/')
+call CountJump#TextObject#MakeWithCountSearch('', '=', 'ai', 'v', '\\\@<!=', '\\\@<!=')
+" quck jump between two windows, just like C-6 for buffers
+au TabLeave * :let g:last_tab=tabpagenr()
+
+fu! LastTab()
+     if !exists("g:last_tab")
+         return
+     endif
+     exe "tabn" g:last_tab
+endfu 
+
+nnoremap <silent> <M-6> :call LastTab()<cr>
