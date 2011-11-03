@@ -1,0 +1,167 @@
+global !p
+def n(a, idx):
+  print a, idx
+  numbers = []
+  for i in a.split("_"):
+     try:
+        numbers.append(int(i))
+     except:
+        pass
+  return str(numbers[idx]) if idx < len(numbers) else ""
+endglobal
+
+global !p
+def calcLeft(index):
+    print index
+    left = 0
+    try:
+        index = int(index)  - 1
+        left = index * 98 + 9
+    except:
+        pass
+    return str(left) if left > 0 else "0"
+endglobal
+
+global !p
+def calcPanelLeft(tabBtnIndex):
+    left = 0
+    try:
+        tabBtnIndex = int(tabBtnIndex)  - 1
+        left = tabBtnIndex * 98 + 9
+    except:
+        pass
+    return str(11 - left)
+endglobal
+    
+snippet ebt "EnumSettingButton"
+<EnumSettingButton bitmap_id="${1}" data_id="${2}" top="${5}"
+    gui_id="EBT.${3}" value="${4}" height="${1/^.*_(\d+)/$1/}" width="${1/^.*?_(\d+).*/$1/}" left="${6}" >
+    <TouchAction OnPress="SetFocus" OnMoveIn="SetFocus" OnMoveOut="KillFocus"
+        OnRelease="SelectAndWriteData" />
+    <DataWriter data_id="MAIN_BROWSER_LINK" name="default" value="${7}" />
+    <DataWriter data_id="FOOTER_LINK" name="default" value="${8}" />
+    <DataWriter data_id="$2" group="true" name="default" value="$4" />
+    <TextLabel string="${8}" top="0" gui_id="TXT.${9}" font_id="Arial-Italic-20"
+        height="${1/^.*_(\d+)/$1/}" width="${1/^.*?_(\d+).*/$1/}" text_color="#000000"
+        left="0" vertical_align="1" horizontal_align="1" />
+</EnumSettingButton>
+endsnippet
+
+snippet tbt "TabButton"
+<TabButton bitmap_id="TAB" ${1} left="`!p snip.rv = calcLeft(t[1])`" top="0" gui_id="TBT.${2}" height="50" width="94" >
+    <TouchAction OnPress="Select" />
+    <TextLabel string_id="${2/\w+/\U$0\E/}" top="0" gui_id="TXT.$2" font_id="Arial-Italic-20"
+        height="50" width="94" text_color="#000000" left="0" 
+        vertical_align="1" horizontal_align="1" />
+    <Panel width="658" top="50" gui_id="PNL.$2" height="296" bg_color="#cedbf7" left="`!p snip.rv = calcPanelLeft(t[1])`">
+</TabButton>
+endsnippet
+
+snippet pop "popup panel"
+<Panel bitmap_id="${1}" top="0" gui_id="PNL.${2}" height="364" 
+    width="680" left="0" >
+endsnippet
+
+snippet pbt "PushButton which writes data"
+<PushButton bitmap_id="${1}" top="0" gui_id="PBT.${2}" height="58" width="192"
+    left="304" >
+    <TouchAction OnPress="SetFocus" OnMoveIn="SetFocus" OnMoveOut="KillFocus"
+        OnRelease="KillFocusAndWriteData" />
+    <DataWriter data_id="PRODUCT_STATE" name="default" value="VENTILATION"
+        comments="Send request to MB to start ventilation" />
+    <TextLabel string_id="START" top="20" gui_id="TXT.Start" font_id="Arial-Italic-20"
+        height="38" width="92" text_color="#33FF00" left="100" />
+</PushButton>
+endsnippet
+
+snippet footer "footer panel"
+<Panel bitmap_id="BOTTOM_BAR" top="0" gui_id="PNL.${1}" height="58"
+    width="800" left="0" >
+endsnippet
+
+snippet continue "continue button in the footer"
+<PushButton bitmap_id="BUT_ACCEPT" top="0" gui_id="PBT.${1}" height="58" width="198"
+    left="201" >
+    <TouchAction OnPress="SetFocus" OnMoveIn="SetFocus" OnMoveOut="KillFocus"
+        OnRelease="KillFocusAndWriteData" />
+    <DataWriter data_id="MAIN_BROWSER_LINK" name="default" value="PNL.${2}" />
+    <DataWriter data_id="FOOTER_LINK" name="default" value="PNL.${3}" />
+    <TextLabel string_id="CONTINUE" top="20" gui_id="TXT.$1" font_id="Arial-Italic-20"
+        height="38" width="92" text_color="#FFFFFF" left="100" />
+</PushButton>
+
+snippet bok "ok button in the footer"
+<PushButton bitmap_id="BUT_ACCEPT" top="0" gui_id="PBT.${1}" height="58" width="198"
+    left="201" >
+    <TouchAction OnPress="SetFocus" OnMoveIn="SetFocus" OnMoveOut="KillFocus"
+        OnRelease="KillFocusAndWriteData" />
+    <DataWriter data_id="MAIN_BROWSER_LINK" name="default" value="-1" />
+    <DataWriter data_id="FOOTER_LINK" name="default" value="-1" />
+    <TextLabel string_id="OK" top="20" gui_id="TXT.$1" font_id="Arial-Italic-20"
+        height="38" width="92" text_color="#FFFFFF" left="100" />
+</PushButton>
+endsnippet
+
+snippet ok "footer with only ok button in the left"
+<Panel bitmap_id="BOTTOM_BAR" top="0" gui_id="PNL.${1}" height="58"
+    width="800" left="0" >
+    <PushButton bitmap_id="BUT_ACCEPT" top="0" gui_id="PBT.$1" height="58" width="198"
+        left="201" >
+        <TouchAction OnPress="SetFocus" OnMoveIn="SetFocus" OnMoveOut="KillFocus"
+            OnRelease="KillFocusAndWriteData" />
+        <DataWriter data_id="MAIN_BROWSER_LINK" name="default" value="-1" />
+        <DataWriter data_id="FOOTER_LINK" name="default" value="-1" />
+        <TextLabel string_id="OK" top="20" gui_id="TXT.$1" font_id="Arial-Italic-20"
+            height="38" width="92" text_color="#FFFFFF" left="100" />
+    </PushButton>
+    <PushButton bitmap_id="BUT_BOTRIGHT" top="0" gui_id="PBT.Dummy$1" height="58" width="198"
+        left="401" />
+</Panel>
+endsnippet
+
+snippet cancel "footer with only cancel button in the right"
+<Panel bitmap_id="BOTTOM_BAR" top="0" gui_id="PNL.${1}" height="58"
+    width="800" left="0" >
+    <PushButton bitmap_id="BUT_BOTLEFT" top="0" gui_id="PBT.Dummy$1" height="58" width="198"
+        left="201" />
+    <PushButton bitmap_id="BUT_CANCEL" top="0" gui_id="PBT.$1"
+        height="58" width="198" left="401" >
+        <TouchAction OnPress="SetFocus" OnMoveIn="SetFocus" OnMoveOut="KillFocus"
+            OnRelease="KillFocusAndWriteData" />
+        <DataWriter data_id="MAIN_BROWSER_LINK" name="default" value="-1" />
+        <DataWriter data_id="FOOTER_LINK" name="default" value="-1" />
+        <TextLabel string_id="CANCEL" top="20" gui_id="TXT.$1" font_id="Arial-Italic-20"
+            height="38" width="92" text_color="#FFFFFF" left="20" />
+    </PushButton>
+</Panel>        
+endsnippet
+
+snippet bcancel
+<PushButton bitmap_id="BUT_CANCEL" top="0" gui_id="PBT.${1}"
+    height="58" width="198" left="401" >
+    <TouchAction OnPress="SetFocus" OnMoveIn="SetFocus" OnMoveOut="KillFocus"
+        OnRelease="KillFocusAndWriteData" />
+    <DataWriter data_id="MAIN_BROWSER_LINK" name="default" value="-1" />
+    <DataWriter data_id="FOOTER_LINK" name="default" value="-1" />
+    <TextLabel string_id="CANCEL" top="20" gui_id="TXT.$1" font_id="Arial-Italic-20"
+        height="38" width="92" text_color="#FFFFFF" left="20" />
+</PushButton>
+endsnippet
+
+snippet ftg "full TabGroup"
+<TabGroup gui_id="TGR.${1}" left="0" top="0" width="680" height="364" bitmap_id="WINDOW_FULL" default_selection="0">
+endsnippet
+
+snippet tg "TabGroup which left side is taken, like Settings"
+<TabGroup width="584" top="1" gui_id="TGR.${1}" height="350" default_selection="0"
+    left="86" >
+endsnippet
+
+snippet stbt "TabButton like settings"
+<TabButton bitmap_id="TAB" top="0" gui_id="TBT.Table1" height="50" width="94" left="0" >
+    <TouchAction OnPress="Select" />
+    <TextLabel string_id="TABLE1" top="10" gui_id="TXT.Table1" font_id="Arial-Italic-20"
+        height="40" width="72" text_color="#000000" left="10" />
+    <Panel width="580" top="50" gui_id="PNL.Table1" height="296" bg_color="#cedbf7"
+        left="2" >
+endsnippet
