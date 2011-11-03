@@ -392,6 +392,55 @@ call CountJump#TextObject#MakeWithCountSearch('', '/', 'ai', 'v', '\\\@<!/', '\\
 call CountJump#TextObject#MakeWithCountSearch('', '\', 'ai', 'v', '\\\@<!\', '\\\@<!\')
 "=xxx=
 call CountJump#TextObject#MakeWithCountSearch('', '=', 'ai', 'v', '\\\@<!=', '\\\@<!=')
+
+" g:org_agenda_dirs specify directories that, along with 
+" their subtrees, are searched for list of .org files when
+" accessing EditAgendaFiles().  Specify your own here, otherwise
+" default will be for g:org_agenda_dirs to hold single
+" directory which is directory of the first .org file opened
+" in current Vim instance:
+" Below is line I use in my Windows install:
+"let g:org_agenda_dirs=["c:/users/herbert/documents/my\ dropbox","c:/users/herbert/desktop"]
+let g:org_agenda_select_dirs=[$HOME."/org"]
+:let g:agenda_files = split(glob($HOME.'/org/*.org'),"\n")
+
+" vars below are used to define default Todo list and
+" default Tag list.  Will be changed in near future so
+" that these are defined by config lines in each .org
+" file itself, but now these are where you can change things:
+let g:org_todo_setup='TODO | DONE'
+" while g:org_tag_setup is itself a string
+let g:org_tag_setup='{@home(h) @work(w) @tennisclub(t)} \n {easy(e) hard(d)} \n {computer(c) phone(p)}'
+
+" leave these as is:
+au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
+au BufRead,BufNewFile *.org            call org#SetOrgFileType()
+au BufRead *.org :PreLoadTags
+au BufWrite *.org :PreWriteTags
+au BufWritePost *.org :PostWriteTags
+
+" below are two examples of Org-mode "hook" functions
+" These present opportunities for end-user customization
+" of how VimOrganizer works.  For more info see the 
+" documentation for hooks in Emacs' Org-mode documentation:
+" http://orgmode.org/worg/org-configs/org-hooks.php#sec-1_40
+
+" These two hooks are currently the only ones enabled in 
+" the VimOrganizer codebase, but they are easy to add so if
+" there's a particular hook you want go ahead and request it
+" or look for where these hooks are implemented in 
+" /ftplugin/org.vim and use them as example for placing your
+" own hooks in VimOrganizer:
+function! Org_property_changed_functions(line,key, val)
+        "call confirm("prop changed: ".a:line."--key:".a:key." val:".a:val)
+endfunction
+function! Org_after_todo_state_change_hook(line,state1, state2)
+        "call ConfirmDrawer("LOGBOOK")
+        "let str = ": - State: " . Pad(a:state2,10) . "   from: " . Pad(a:state1,10) .
+        "            \ '    [' . Timestamp() . ']'
+        "call append(line("."), repeat(' ',len(matchstr(getline(line(".")),'^\s*'))) . str)
+endfunction
+
 " quck jump between two windows, just like C-6 for buffers
 au TabLeave * :let g:last_tab=tabpagenr()
 
